@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 export class Home extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
+        console.log(props, 'are the props');
         this.state = {
             appName: this.props.initialAppName,
             initialHobbies: this.props.userData.hobbies
@@ -30,9 +30,10 @@ export class Home extends React.Component {
         this.setState({
             appName: event.target.value
         });
-
-        console.log(this.props.onChangeAppName);
-        this.props.changeAppName(event.target.value);
+        console.log(this.props);
+        console.log(this.props.changeAppName, 'is the change name call');
+        this.props.changeAppName();
+        //this.props.changeAppName(event.target.value);
     }
 
     render() {
@@ -42,6 +43,7 @@ export class Home extends React.Component {
                     Your name is {this.props.name}, and your age is {this.props.age}.
                     You reside in {this.props.userData.city}, {this.props.userData.state}
                 </p>
+                {/*
                 <h2>{this.state.initialHobbies.length} Hobbies </h2>
                 <ul>
                     {this.state.initialHobbies.map((hobby, index) => {
@@ -58,17 +60,17 @@ export class Home extends React.Component {
                         )
                     })}
                 </ul>
+                */}
                 <hr />
                 <h3>Change app name</h3>
-                <input
-                    type="text"
-                    value={this.state.appName}
-                    onChange={this.onAppNameChange}
-                    name="appName" />
+                <button onClick={this.onAppNameChange}>
+                    Change name
+                </button>
             </div>
         );
     }
 }
+
 
 Home.propTypes = {
     age: PropTypes.number,
@@ -76,3 +78,4 @@ Home.propTypes = {
     userData: PropTypes.object,
     initialAppName: PropTypes.string
 }
+
